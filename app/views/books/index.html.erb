@@ -44,13 +44,15 @@
           <tr>
             <td>
               <!--投稿したユーザ詳細画面に遷移させる-->
-              <%= link_to user_path(userbook) do %>
+              <%= link_to user_path(@user.id) do %>
                 <!--画像が投稿ユーザ画像になるようにする-->
                 <%= attachment_image_tag book.user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
               <% end %>
             </td>
             <td>
-              <%= link_to book.title, book_path(book) %>
+              <%= link_to book_path(book) do %>
+                <%= book.title %>
+              <% end %>
             </td>
             <td><%= book.body %></td>
           </tr>
