@@ -41,6 +41,7 @@
         </td>
         <td><%= link_to @book.title, book_path(@book) %></td>
         <td><%= @book.body %></td>
+        <!--もし投稿者＝現在ログインしているユーザだったら表示される-->
         <% if @book.user == current_user %>
           <td><%= link_to "Edit", edit_book_path(@book) %></td>
           <td><%= link_to "Destroy", book_path(@book), method: :delete %></td>

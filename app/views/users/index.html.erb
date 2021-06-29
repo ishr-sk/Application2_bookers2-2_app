@@ -1,2 +1,59 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<div class="profile">
+  <h2>Users info</h2>
+    <!--変更前 %= image_tag('sample-author1.png') % -->
+    <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+      <table class="profile-table">
+        <tbody>
+
+          <tr>
+            <th>name</th>
+            <th>
+              <%= @user.name %>
+            </th>
+          </tr>
+          <tr>
+            <th>introduction</th>
+            <th>
+              <%= @user.introduction %>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+      <p><%= link_to "user編集", edit_user_path(@user) %></p>
+</div>
+<div class="book">
+  <h2>New book</h2>
+    <%= form_with model:@book, local:true do |f| %>
+      <h3>Title</h3>
+      <%= f.text_field :title %>
+      <h3>body</h3>
+      <%= f.text_area :body %><br />
+      <%= f.submit 'Create book' %>
+    <% end %>
+</div>
+<div class="Users">
+  <h2>Users</h2>
+  <table class="table-users">
+    <thead>
+      <tr>
+        <th>image</th>
+        <th>name</th>
+        <th></th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td>
+              <%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+            </td>
+            <td>
+              <%= user.name %>
+            </td>
+            <td><%= link_to "Show", user_path(user.id) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+  </table>
+</div>
