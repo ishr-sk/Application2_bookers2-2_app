@@ -5,6 +5,8 @@ class BooksController < ApplicationController
   
   def create
     book = Book.new(book_params)
+    #　投稿したidはログインしてるユーザidである(大事)
+    book.user_id = current_user.id
     book.save
     redirect_to book_path(book)
   end
@@ -33,6 +35,9 @@ class BooksController < ApplicationController
   end
   
   def destroy
+    book = Book.find(params[:id])
+    book.destroy
+    redirect_to books_path
   end
 
   private
@@ -40,5 +45,10 @@ class BooksController < ApplicationController
  def book_params
    params.require(:book).permit(:title, :body)
  end
+ 
+  def user_params
+    params.require(:user).permit(:name, :introduction, :profile_image)
+  end
+  
   
 end
