@@ -6,6 +6,8 @@ class BooksController < ApplicationController
     @book.user_id = current_user.id
     # バリデーションの結果によりリダイレクト先変わる
     if @book.save
+      # サクセスメッセージ
+      flash[:notice] = "You have created book successfully."
       redirect_to book_path(@book)
     else
       @user = current_user
@@ -40,6 +42,8 @@ class BooksController < ApplicationController
     # ローカル変数だとデータが入らなかったからインスタント変数にする
     @book = Book.find(params[:id])
     if  @book.update(book_params)
+      # サクセスメッセージ
+      flash[:notice] = "You have updated book successfully."
       redirect_to book_path(@book)
     else
       render :edit
