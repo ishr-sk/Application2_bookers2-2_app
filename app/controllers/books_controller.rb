@@ -1,8 +1,4 @@
 class BooksController < ApplicationController
-  def new
-    @book = Book.new
-  end
-  
   def create
     # インスタント変数じゃないとエラー分が表示されなかった
     @book = Book.new(book_params)
@@ -10,7 +6,7 @@ class BooksController < ApplicationController
     @book.user_id = current_user.id
     # バリデーションの結果によりリダイレクト先変わる
     if @book.save
-      redirect_to book_path(book)
+      redirect_to book_path(@book)
     else
       @user = current_user
       @books = Book.all
@@ -44,7 +40,7 @@ class BooksController < ApplicationController
     # ローカル変数だとデータが入らなかったからインスタント変数にする
     @book = Book.find(params[:id])
     if  @book.update(book_params)
-      redirect_to book_path(book)
+      redirect_to book_path(@book)
     else
       render :edit
     end

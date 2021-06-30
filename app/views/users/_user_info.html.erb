@@ -1,0 +1,18 @@
+<div class="profile">
+  <h2>Users info</h2>
+  <!--変更前 %= image_tag('sample-author1.png') % -->
+    <%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+      <table class="profile-table">
+        <tbody>
+          <tr>
+            <th>name</th>
+            <th><%= user.name %></th>
+          </tr>
+          <tr>
+            <th>introduction</th>
+            <th><%= user.introduction %></th>
+          </tr>
+        </tbody>
+      </table>
+      <p><%= link_to "user編集", edit_user_path(user) %></p>
+</div>
