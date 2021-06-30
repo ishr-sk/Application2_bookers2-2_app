@@ -2,7 +2,7 @@
   <h2>Users info</h2>
   <!--変更前 %= image_tag('sample-author1.png') % -->
     <%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
-      <table class="profile-table">
+      <table class="table">
         <tbody>
           <tr>
             <th>name</th>
@@ -14,5 +14,13 @@
           </tr>
         </tbody>
       </table>
-      <p><%= link_to "user編集", edit_user_path(user) %></p>
+      <p>
+        <!--Font Awesomeアイコン埋め込み(枠線を残してボタンの背景色を透過)-->
+        <!--.btn-block. を適用すると, 親要素の幅に合わせられる-->
+        <%= link_to edit_user_path(user) do %>
+            <button type="button" class="btn btn-outline-secondary btn-block btn-sm">
+              <i class="fas fa-user-cog"></i>
+            </button>
+          <% end %>
+      </p>
 </div>

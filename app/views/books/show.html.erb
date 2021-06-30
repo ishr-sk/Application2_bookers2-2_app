@@ -7,39 +7,46 @@
   <% end %>
 </font>
 
-<!--部分テンプレート-->
-<%= render 'users/user_info', user: @user %>
-
-<div class="book_new">
-  <h2>New book</h2>
-    <%= form_with model:@book_new, local:true do |f| %>
-      <h3>Title</h3>
-      <%= f.text_field :title %>
-      <h3>body</h3>
-      <%= f.text_area :body %><br />
-      <%= f.submit 'Create book' %>
-    <% end %>
-</div>
-
-<div class="book">
-  <h2>Book detail</h2>
-  <table class="book-table">
-    <tbody>
-      <tr>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 pt-3">
+      <!--部分テンプレート-->
+      <%= render 'users/user_info', user: @user %>
+      <div class="book_new">
+      <h2>New book</h2>
+        <%= form_with model:@book_new, local:true do |f| %>
+        <p>Title</p>
+        <%= f.text_field :title, class: 'form-control' %>
+        <p>body</p>
+        <%= f.text_area :body, class: 'form-control' %><br />
+        <%= f.submit 'Create Book', class: 'btn btn-success' %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-8 offset-md-1 pt-3">
+    <div class="book">
+    <h2>Book detail</h2>
+      <table class="table">
+        <tbody>
+        <tr>
         <td>
           <%= link_to user_path(@user.id) do %>
-            <%= @user.name %>
             <%= attachment_image_tag @book.user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg" %>
+            <br />
+            <%= @user.name %>
           <% end %>
         </td>
         <td><%= link_to @book.title, book_path(@book) %></td>
         <td><%= @book.body %></td>
         <!--もし投稿者＝現在ログインしているユーザだったら表示される-->
         <% if @book.user == current_user %>
-          <td><%= link_to "Edit", edit_book_path(@book) %></td>
-          <td><%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "本当に消しますか？" %></td>
+          <td><%= link_to "Edit", edit_book_path(@book), class: 'btn btn-success btn-sm' %></td>
+          <td><%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "本当に消しますか？", class: 'btn btn-danger btn-sm' %></td>
         <% end %>
       </tr>
     </tbody>
   </table>
+</div>
+    </div>
+  </div>
 </div>

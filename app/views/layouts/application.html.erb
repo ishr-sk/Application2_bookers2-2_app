@@ -4,43 +4,91 @@
     <title>Bookers2</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <!--ヘッダーフッター編集のため下記追加-->
+    <meta name="viewport" content="width-device-width, initial-scale=1, maximum-scale=1" >
+    <!--以上-->
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+  
+  <!--ヘッダーフッター編集のため下記追加-->
 
-  <body>
-      <span><%= link_to "Bookers", '/' %></span>
-    <!--ログイン後-->
-    <% if user_signed_in? %>
-      <span>
-        <%= link_to "Home", user_path(current_user) %>
-      </span>
-      <span>
-        <%= link_to "Users", users_path %>
-      </span>
-      <span>
-        <%= link_to "Books", books_path %>
-      </span>
-      <span>
-        <%= link_to "logout", destroy_user_session_path, method: :delete %>
-      </span>
-    <!--ログイン前-->
-    <% else %>
-      <span>
-        <%= link_to "Home", '/'  %>
-      </span>
-      <span>
-        <%= link_to "About", homes_about_path %>
-      </span>
-      <span>
-        <%= link_to "sign up", new_user_registration_path %>
-      </span>
-      <span>
-        <%= link_to "login",new_user_session_path %>
-      </span>
-    <% end %>
+  <body class="d-flex flex-column vh-100">
+    <header class="shadow-sm">
+      <!--下記レイアウト（背景：ダーク、文字：ホワイト）-->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <a class="navbar-brand p-3" href="/">Bookers</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav ml-auto">
+              <!--ログイン後-->
+                <% if user_signed_in? %>
+                  <li class="nav-item">
+                    <!--Font Awesomeアイコン埋め込み-->
+                    <%= link_to user_path(current_user), class: 'nav-link text-light' do %>
+                      <i class="fas fa-home"> Home</i>
+                    <% end %>
+                  </li>
+                  <li class="nav-item">
+                    <%= link_to users_path, class: 'nav-link text-light' do %>
+                      <i class="fas fa-users"> Users</i>
+                    <% end %>
+                  </li>
+                  <li class="nav-item">
+                    <%= link_to books_path, class: 'nav-link text-light' do %>
+                      <i class="fas fa-book-open"> Books</i>
+                    <% end %>
+                  </li>
+                  <li class="nav-item">
+                    <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-light' do %>
+                      <i class="fas fa-sign-out-alt"> logout</i>
+                    <% end %>  
+                  </li>
+              <!--ログイン前-->
+                <% else %>
+                  <span>
+                    <%= link_to root_path, class: 'nav-link text-light' do %>
+                      <i class="fas fa-home"> Home</i>
+                    <% end %>
+                  </span>
+                  <span>
+                    <%= link_to home_about_path, class: 'nav-link text-light' do %>
+                      <i class="fas fa-link"> About</i>
+                    <% end %>
+                  </span>
+                  <span>
+                    <%= link_to new_user_registration_path, class: 'nav-link text-light' do %>
+                      <i class="fas fa-user-plus"> sign up</i>
+                    <% end %>
+                  </span>
+                  <span>
+                    <%= link_to new_user_session_path, class: 'nav-link text-light' do %>
+                      <i class="fas fa-sign-in-alt"> login</i>
+                    <% end %>
+                  </span>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+      </nav>
+    </header>
+    <main class="mb-auto">
+      <%= yield %>
+    </main>
     
-    <%= yield %>
+    
+    <footer class="bg-white text-black pt-5 pb-4">
+      <div class="container mt-5">
+        <div class="row">
+        <div class="mx-auto">
+          <p>CopyRight Infratop.inc</p>
+        </div>
+      </div>
+      </div>
+    </footer>
   </body>
 </html>

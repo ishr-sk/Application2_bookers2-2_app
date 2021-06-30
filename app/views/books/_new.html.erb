@@ -1,8 +1,8 @@
 <h2>New book</h2>
 <%= form_with model:book, local:true do |f| %>
-  <h3>Title</h3>
-  <%= f.text_field :title %>
-  <h3>body</h3>
-  <%= f.text_area :body %><br />
-  <%= f.submit 'Create book' %>
+  <p>Title</p>
+    <%= f.text_field :title, class: 'form-control' %>
+  <p>body</p>
+    <%= f.text_area :body, class: 'form-control' %><br />
+    <%= f.submit 'Create Book', class: 'btn btn-success' %>
 <% end %>
