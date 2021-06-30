@@ -1,5 +1,14 @@
 <div class="user-edit">
   <h2>User info</h2>
+    <!--エラー分の表示-->
+    <font color="red">
+      <% if @user.errors.any? %>
+        <h2><%= @user.errors.count %> errors prohibited this obj from being saved:</h2>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      <% end %>
+    </font>
     <%= form_with model:@user, local:true do |f| %>
       <label for="inputName">Name</label><br />
       <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"name" %><br />
