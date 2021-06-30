@@ -1,3 +1,13 @@
+<!--エラー分の表示-->
+<font color="red">
+  <% if @book.errors.any? %>
+    <h2><%= @book.errors.count %> errors prohibited this obj from being saved:</h2>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+<% end %>
+</font>
+
 <div class="profile">
   <h2>Users info</h2>
     <!--変更前 %= image_tag('sample-author1.png') % -->
