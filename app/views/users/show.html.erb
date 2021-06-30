@@ -1,3 +1,12 @@
+<!--サクセスメッセージ-->
+<font color="green">
+  <% if flash[:notice] %>
+    <p id = "notice">
+      <%= flash[:notice] %>
+    </p>
+  <% end %>
+</font>
+
 <!--部分テンプレート-->
 <%= render 'users/user_info', user: @user %>
 
