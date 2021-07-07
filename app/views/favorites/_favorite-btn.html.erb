@@ -1,7 +1,7 @@
   <% if book.favorited_by?(current_user) %>
     <!--ハートの色を赤に変える class: "text-danger"-->
-    <%= link_to book.favorites.count, book_favorites_path(book), method: :delete, class: 'fas fa-heart text-danger' %>
+    <%= link_to book.favorites.count, book_favorites_path(book), remote: true, method: :delete, class: 'fas fa-heart text-danger' %>
   <% else %>
     <!--ハートの色を青に変える class: "text-primary"-->
-    <%= link_to book.favorites.count, book_favorites_path(book), method: :post, class: 'fas fa-heart text-primary' %>
+    <%= link_to book.favorites.count, book_favorites_path(book), remote: true, method: :post, class: 'fas fa-heart text-primary' %>
   <% end %>
