@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   def create
     # インスタント変数じゃないとエラー分が表示されなかった
     @book = Book.new(book_params)
-    #　投稿したidはログインしてるユーザidである(大事)
+    # 投稿したidはログインしてるユーザidである(大事)
     @book.user_id = current_user.id
     # バリデーションの結果によりリダイレクト先変わる
     if @book.save
